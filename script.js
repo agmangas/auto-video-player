@@ -1,5 +1,5 @@
 const videosPath = "/videos";
-const videoRe = /href="(.+\.mp4)"/g;
+const videoRe = /"(.+\.mp4)"/g;
 
 function createVideo(videoPath) {
   const video = document.createElement("video");
@@ -24,15 +24,13 @@ fetch(videosPath)
     return response.text();
   })
   .then(bodyText => {
-    const matches = Array.from(bodyText.matchAll(videoRe));
+    const matches = Array.from(bodyText.match(videoRe));
 
     console.log("Matches", matches);
 
     const videoNames = matches
-      .map(match => {
-        return match.length === 2 ? `${videosPath}/${match[1]}` : null;
-      })
-      .filter(val => val !== null);
+      .map(item => item.slice(1, item.length - 1))
+      .map(item => `${videosPath}/${item}`);
 
     console.log("Videos", videoNames);
 
