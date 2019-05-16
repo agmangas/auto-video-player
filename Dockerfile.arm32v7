@@ -1,0 +1,4 @@
+FROM arm32v7/nginx:1.15
+COPY qemu-arm-static /usr/bin/
+COPY default.conf /etc/nginx/conf.d/default.conf
+COPY . /usr/share/nginx/html/
