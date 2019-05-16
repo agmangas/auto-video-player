@@ -14,5 +14,10 @@ QEMU_USER_STATIC_LATEST_TAG=$(curl -s https://api.github.com/repos/multiarch/qem
     | head -n 1 \
     | cut -d '"' -f 4)
 
-curl -SL "${QEMU_USER_STATIC_DOWNLOAD_URL}/${QEMU_USER_STATIC_LATEST_TAG}/x86_64_qemu-${QEMU_USER_STATIC_ARCH}-static.tar.gz" \
-    | tar xzv
+QEMU_STATIC_URL="${QEMU_USER_STATIC_DOWNLOAD_URL}/${QEMU_USER_STATIC_LATEST_TAG}/x86_64_qemu-${QEMU_USER_STATIC_ARCH}-static.tar.gz"
+
+echo "Downloading qemu from:\n${QEMU_STATIC_URL}"
+
+curl -SL ${QEMU_STATIC_URL} | tar xzv
+
+echo "Workspace file list:\n$(ls -lh)"
